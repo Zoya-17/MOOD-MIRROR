@@ -1,8 +1,8 @@
 
 const MOODS = [
-  { 
-    key: "Happy", 
-    emoji: "😊", 
+  {
+    key: "Happy",
+    emoji: "😊",
     bgClass: "bg-happy",
     color: "#10b981",
     particles: ["✨", "🌟", "💫", "🎉", "🌈", "☀️"],
@@ -15,9 +15,9 @@ const MOODS = [
     ],
     tips: ["Share your happiness with someone", "Take a photo to remember this moment", "Do something kind for others"]
   },
-  { 
-    key: "Sad", 
-    emoji: "😔", 
+  {
+    key: "Sad",
+    emoji: "😔",
     bgClass: "bg-sad",
     color: "#3b82f6",
     particles: ["💧", "🌧️", "☁️", "💙", "🌫️"],
@@ -30,9 +30,9 @@ const MOODS = [
     ],
     tips: ["Reach out to a friend", "Practice deep breathing", "Write in a journal"]
   },
-  { 
-    key: "Angry", 
-    emoji: "😠", 
+  {
+    key: "Angry",
+    emoji: "😠",
     bgClass: "bg-angry",
     color: "#ef4444",
     particles: ["⚡", "🔥", "💥", "🌪️", "💢"],
@@ -45,9 +45,9 @@ const MOODS = [
     ],
     tips: ["Try physical exercise", "Practice mindfulness", "Talk to someone you trust"]
   },
-  { 
-    key: "Tired", 
-    emoji: "😴", 
+  {
+    key: "Tired",
+    emoji: "😴",
     bgClass: "bg-tired",
     color: "#8b5cf6",
     particles: ["💤", "🌙", "⭐", "🌌", "😪"],
@@ -60,9 +60,9 @@ const MOODS = [
     ],
     tips: ["Take a power nap", "Go to bed early tonight", "Reduce screen time"]
   },
-  { 
-    key: "Calm", 
-    emoji: "😌", 
+  {
+    key: "Calm",
+    emoji: "😌",
     bgClass: "bg-calm",
     color: "#06b6d4",
     particles: ["🍃", "🌊", "🕊️", "☮️", "🧘‍♀️", "💙"],
@@ -75,9 +75,9 @@ const MOODS = [
     ],
     tips: ["Practice meditation", "Spend time in nature", "Listen to calming music"]
   },
-  { 
-    key: "Excited", 
-    emoji: "🤩", 
+  {
+    key: "Excited",
+    emoji: "🤩",
     bgClass: "bg-excited",
     color: "#f59e0b",
     particles: ["🎊", "🎉", "⚡", "🌟", "🔥", "🎈"],
@@ -90,9 +90,9 @@ const MOODS = [
     ],
     tips: ["Channel energy into a project", "Share your excitement with others", "Start something new"]
   },
-  { 
-    key: "Anxious", 
-    emoji: "😰", 
+  {
+    key: "Anxious",
+    emoji: "😰",
     bgClass: "bg-anxious",
     color: "#f59e0b",
     particles: ["🌀", "💭", "🫨", "😵‍💫"],
@@ -105,9 +105,9 @@ const MOODS = [
     ],
     tips: ["Try the 4-7-8 breathing technique", "Ground yourself with 5-4-3-2-1 method", "Talk to someone"]
   },
-  { 
-    key: "Neutral", 
-    emoji: "😐", 
+  {
+    key: "Neutral",
+    emoji: "😐",
     bgClass: "bg-neutral",
     color: "#6b7280",
     particles: ["⚪", "🔘", "⚫", "🔹", "◯"],
@@ -142,10 +142,11 @@ class EnhancedMoodMirror {
     this.settings = this.loadData('settings') || this.getDefaultSettings();
     this.streakCount = this.calculateStreak();
     this.stats = this.calculateStats();
-    
     this.init();
+    
   }
-  
+
+
 
   getDefaultSettings() {
     return {
@@ -164,7 +165,8 @@ class EnhancedMoodMirror {
     this.updateUI();
     this.setupVoiceRecognition();
     this.checkNotificationPermission();
-    
+
+
     // Load last session if enabled
     if (this.settings.persistData) {
       this.restoreLastSession();
@@ -210,36 +212,36 @@ class EnhancedMoodMirror {
 
   bindEvents() {
     // Mood actions
-    
+
     document.getElementById('randomizeBtn').addEventListener('click', () => this.randomizeMood());
     document.getElementById('clearBtn').addEventListener('click', () => this.clearMood());
     document.getElementById('saveBtn').addEventListener('click', () => this.saveMoodEntry());
     document.getElementById('shareBtn').addEventListener('click', () => this.shareMood());
-    
+
     // Settings
     this.elements.muteToggle.addEventListener('change', (e) => this.updateSetting('soundEnabled', !e.target.checked));
     this.elements.persistToggle.addEventListener('change', (e) => this.updateSetting('persistData', e.target.checked));
     this.elements.notificationsToggle.addEventListener('change', (e) => this.toggleNotifications(e.target.checked));
-    
+
     // Input handlers
     this.elements.intensityRange.addEventListener('input', (e) => this.updateIntensity(e.target.value));
     this.elements.notesInput.addEventListener('input', (e) => this.updateCharCount(e.target.value));
     this.elements.historyFilter.addEventListener('change', (e) => this.filterHistory(e.target.value));
-    
+
     // History
     document.getElementById('clearHistoryBtn').addEventListener('click', () => this.clearHistory());
     document.getElementById('exportBtn').addEventListener('click', () => this.exportData());
-    
+
     // Modal
     document.getElementById('modalClose').addEventListener('click', () => this.closeModal());
     this.elements.modalOverlay.addEventListener('click', (e) => {
       if (e.target === this.elements.modalOverlay) this.closeModal();
     });
-    
+
     // Help and voice
     document.getElementById('helpBtn').addEventListener('click', () => this.showHelp());
     document.getElementById('voiceBtn').addEventListener('click', () => this.startVoiceInput());
-    
+
     // Keyboard shortcuts
     document.addEventListener('keydown', (e) => this.handleKeyboardShortcuts(e));
   }
@@ -261,7 +263,7 @@ class EnhancedMoodMirror {
   }
 
   selectMood(mood) {
-    this.playSound('click');
+    S.play('click');
     this.currentMood = mood;
     this.updateMoodDisplay(mood);
     this.createParticles(mood);
@@ -273,39 +275,39 @@ class EnhancedMoodMirror {
     const moodClasses = MOODS.map(m => m.bgClass);
     this.elements.resultCard.classList.remove(...moodClasses);
     this.elements.resultCard.classList.add('dynamic-bg', mood.bgClass);
-    
+
     this.elements.selectedMood.textContent = `${mood.emoji} ${mood.key}`;
-    
+
     const quote = this.getPersonalizedQuote(mood);
     this.elements.quote.textContent = quote;
     this.elements.quote.className = 'quote';
-    
-    this.playSound('chime');
+
+    S.play('chime');
   }
 
   getPersonalizedQuote(mood) {
     const baseQuote = mood.quotes[Math.floor(Math.random() * mood.quotes.length)];
     const intensity = parseInt(this.elements.intensityRange.value);
     const note = this.elements.notesInput.value.trim();
-    
+
     let personalizedQuote = baseQuote;
-    
+
     if (intensity >= 4) {
       personalizedQuote += " Your high energy is amazing—use it wisely!";
     } else if (intensity <= 2) {
       personalizedQuote += " Take it slow and be patient with yourself.";
     }
-    
+
     return personalizedQuote;
   }
 
   updateMoodMeta() {
     if (!this.currentMood) return;
-    
+
     const intensity = this.elements.intensityRange.value;
     const timestamp = new Date().toLocaleString();
     const tip = this.currentMood.tips[Math.floor(Math.random() * this.currentMood.tips.length)];
-    
+
     this.elements.moodMeta.innerHTML = `
       <div>Intensity: ${intensity}/5 • ${timestamp}</div>
       <div style="margin-top: 4px; font-style: italic;">💡 Tip: ${tip}</div>
@@ -324,22 +326,22 @@ class EnhancedMoodMirror {
 
     const particlesContainer = document.createElement('div');
     particlesContainer.className = 'mood-particles';
-    
+
     const particleCount = Math.floor(Math.random() * 4) + 6;
-    
+
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div');
       particle.className = 'particle';
       particle.textContent = mood.particles[Math.floor(Math.random() * mood.particles.length)];
-      
+
       particle.style.left = Math.random() * 90 + '%';
       particle.style.top = Math.random() * 80 + '%';
       particle.style.animationDelay = Math.random() * 2 + 's';
       particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
-      
+
       particlesContainer.appendChild(particle);
     }
-    
+
     this.elements.resultCard.appendChild(particlesContainer);
   }
 
@@ -352,16 +354,16 @@ class EnhancedMoodMirror {
     this.currentMood = null;
     const moodClasses = MOODS.map(m => m.bgClass);
     this.elements.resultCard.classList.remove(...moodClasses, 'dynamic-bg');
-    
+
     const particles = this.elements.resultCard.querySelector('.mood-particles');
     if (particles) particles.remove();
-    
+
     this.elements.selectedMood.textContent = 'Select a mood above';
     this.elements.quote.textContent = 'Choose how you\'re feeling to get personalized insights and motivation.';
     this.elements.moodMeta.innerHTML = '';
-    
+
     document.querySelectorAll('.mood-btn').forEach(btn => btn.classList.remove('active'));
-    this.playSound('toggle');
+    S.play('toggle');
   }
 
   saveMoodEntry() {
@@ -382,14 +384,14 @@ class EnhancedMoodMirror {
 
     this.moodHistory.unshift(entry);
     this.saveData('moodHistory', this.moodHistory);
-    
+
     this.stats = this.calculateStats();
     this.streakCount = this.calculateStreak();
     this.updateUI();
-    
+
     this.showToast('Mood entry saved successfully! 🎉', 'success');
-    this.playSound('chime');
-    
+    S.play('chime');
+
     // Clear form
     this.elements.notesInput.value = '';
     this.updateCharCount('');
@@ -438,7 +440,7 @@ class EnhancedMoodMirror {
     if (this.moodHistory.length === 0) return 0;
 
     const today = new Date().toDateString();
-    const uniqueDates = [...new Set(this.moodHistory.map(entry => 
+    const uniqueDates = [...new Set(this.moodHistory.map(entry =>
       new Date(entry.timestamp).toDateString()
     ))].sort((a, b) => new Date(b) - new Date(a));
 
@@ -467,7 +469,7 @@ class EnhancedMoodMirror {
 
     const moodCounts = {};
     let totalIntensity = 0;
-    
+
     // Filter for last 7 days
     const weekAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
     const weeklyEntries = this.moodHistory.filter(entry => entry.timestamp > weekAgo);
@@ -477,12 +479,12 @@ class EnhancedMoodMirror {
       totalIntensity += entry.intensity || 3;
     });
 
-    const dominant = Object.keys(moodCounts).reduce((a, b) => 
+    const dominant = Object.keys(moodCounts).reduce((a, b) =>
       moodCounts[a] > moodCounts[b] ? a : b, 'Happy'
     );
 
     const dominantEmoji = MOODS.find(m => m.key === dominant)?.emoji || '😊';
-    const weeklyAvg = weeklyEntries.length > 0 
+    const weeklyAvg = weeklyEntries.length > 0
       ? (weeklyEntries.reduce((sum, entry) => sum + (entry.intensity || 3), 0) / weeklyEntries.length).toFixed(1)
       : 0;
 
@@ -529,10 +531,10 @@ class EnhancedMoodMirror {
     filteredHistory.slice(0, 20).forEach(entry => {
       const item = document.createElement('div');
       item.className = 'history-item';
-      
+
       const date = new Date(entry.timestamp);
-      const timeString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-      
+      const timeString = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
       item.innerHTML = `
         <div class="history-emoji">${entry.emoji}</div>
         <div class="history-content">
@@ -541,7 +543,7 @@ class EnhancedMoodMirror {
           ${entry.note ? `<div class="history-note">"${entry.note}"</div>` : ''}
         </div>
       `;
-      
+
       this.elements.historyList.appendChild(item);
     });
   }
@@ -558,7 +560,7 @@ class EnhancedMoodMirror {
       this.streakCount = this.calculateStreak();
       this.updateUI();
       this.showToast('History cleared', 'success');
-      this.playSound('toggle');
+      S.play('toggle');
     }
   }
 
@@ -572,7 +574,7 @@ class EnhancedMoodMirror {
 
     const blob = new Blob([JSON.stringify(dataToExport, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    
+
     const a = document.createElement('a');
     a.href = url;
     a.download = `mood-mirror-export-${new Date().toISOString().split('T')[0]}.json`;
@@ -580,7 +582,7 @@ class EnhancedMoodMirror {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    
+
     this.showToast('Data exported successfully!', 'success');
   }
 
@@ -638,7 +640,7 @@ class EnhancedMoodMirror {
         }
       }
     }
-    
+
     this.showToast('I didn\'t catch a mood from that. Try saying "I feel happy" or similar.', 'info');
   }
 
@@ -652,7 +654,7 @@ class EnhancedMoodMirror {
 
   async toggleNotifications(enabled) {
     this.updateSetting('notifications', enabled);
-    
+
     if (enabled && 'Notification' in window) {
       const permission = await Notification.requestPermission();
       if (permission === 'granted') {
@@ -670,13 +672,13 @@ class EnhancedMoodMirror {
     const now = new Date();
     const scheduledTime = new Date();
     scheduledTime.setHours(19, 0, 0, 0);
-    
+
     if (scheduledTime <= now) {
       scheduledTime.setDate(scheduledTime.getDate() + 1);
     }
-    
+
     const timeUntilNotification = scheduledTime.getTime() - now.getTime();
-    
+
     setTimeout(() => {
       if (this.settings.notifications && Notification.permission === 'granted') {
         new Notification('Mood Mirror Reminder', {
@@ -693,7 +695,7 @@ class EnhancedMoodMirror {
       const keyMap = {
         '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, '6': 5, '7': 6, '8': 7
       };
-      
+
       if (keyMap.hasOwnProperty(e.key)) {
         e.preventDefault();
         const moodIndex = keyMap[e.key];
@@ -701,18 +703,18 @@ class EnhancedMoodMirror {
           this.selectMood(MOODS[moodIndex]);
         }
       }
-      
+
       if (e.key === 's') {
         e.preventDefault();
         this.saveMoodEntry();
       }
-      
+
       if (e.key === 'c') {
         e.preventDefault();
         this.clearMood();
       }
     }
-    
+
     if (e.key === 'Escape') {
       this.closeModal();
     }
@@ -767,31 +769,39 @@ class EnhancedMoodMirror {
     const toast = this.elements.toast;
     const icon = toast.querySelector('.toast-icon');
     const messageEl = toast.querySelector('.toast-message');
-    
+
     const icons = { success: '✅', warning: '⚠️', info: 'ℹ️', error: '❌' };
     const colors = { success: 'var(--success)', warning: 'var(--warning)', info: 'var(--accent-blue)', error: 'var(--danger)' };
-    
+
     icon.textContent = icons[type] || icons.info;
     messageEl.textContent = message;
     toast.style.background = colors[type] || colors.info;
-    
+
     toast.classList.add('show');
-    
+
     setTimeout(() => {
       toast.classList.remove('show');
     }, 3000);
   }
-
   playSound(soundName) {
     if (!this.settings.soundEnabled) return;
-    
-    const audio = document.getElementById(`snd${soundName.charAt(0).toUpperCase() + soundName.slice(1)}`);
-    if (audio) {
-      audio.currentTime = 0;
-      audio.play().catch(() => {}); // Ignore errors if audio files don't exist
+
+    try {
+      const audio = document.getElementById(`snd${soundName.charAt(0).toUpperCase() + soundName.slice(1)}`);
+      if (audio) {
+        audio.currentTime = 0;
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.warn(`Audio playback failed: ${error}`);
+          });
+        }
+      }
+    } catch (error) {
+      console.warn(`Error playing sound ${soundName}: ${error}`);
     }
   }
-
   updateSetting(key, value) {
     this.settings[key] = value;
     this.saveData('settings', this.settings);
@@ -803,7 +813,7 @@ class EnhancedMoodMirror {
       this.elements.intensityRange.value = lastSession.intensity || 3;
       this.elements.intensityLabel.textContent = `${lastSession.intensity || 3}/5`;
       this.elements.notesInput.value = lastSession.note || '';
-      
+
       if (lastSession.mood) {
         const mood = MOODS.find(m => m.key === lastSession.mood);
         if (mood) {
@@ -815,14 +825,14 @@ class EnhancedMoodMirror {
 
   saveLastSession() {
     if (!this.settings.persistData) return;
-    
+
     const session = {
       mood: this.currentMood?.key,
       intensity: parseInt(this.elements.intensityRange.value),
       note: this.elements.notesInput.value.trim(),
       timestamp: Date.now()
     };
-    
+
     this.saveData('lastSession', session);
   }
 
