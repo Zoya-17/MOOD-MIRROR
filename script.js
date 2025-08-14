@@ -627,7 +627,11 @@ class EnhancedMoodMirror {
       'good': 'Happy',
       'bad': 'Sad',
       'fine': 'Neutral',
-      'okay': 'Neutral'
+      'okay': 'Neutral',
+      'low' : 'Sad',
+      'furious' : 'Angry',
+      'great' : 'Happy',
+       
     };
 
     for (const [keyword, moodKey] of Object.entries(moodKeywords)) {
@@ -878,4 +882,5 @@ setTimeout(() => {
   if (loadingScreen) {
     loadingScreen.classList.add('hidden');
   }
+
 }, 3000);
