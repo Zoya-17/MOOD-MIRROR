@@ -630,7 +630,7 @@ class EnhancedMoodMirror {
       'okay': 'Neutral',
       'low' : 'Sad',
       'furious' : 'Angry',
-      'great' : 'Happy',
+      'great' : 'Happy'
        
     };
 
@@ -884,3 +884,4 @@ setTimeout(() => {
   }
 
 }, 3000);
+
